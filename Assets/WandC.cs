@@ -4,56 +4,46 @@ using UnityEngine.SceneManagement;
 
 public class WandC : MonoBehaviour
 {
-    private Valve.VR.EVRButtonId gripButton = Valve.VR.EVRButtonId.k_EButton_Grip;
-    private Valve.VR.EVRButtonId triggerButton = Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger;
-
-    private SteamVR_Controller.Device controller { get { return SteamVR_Controller.Input((int)trackedObj.index); } }
     private SteamVR_TrackedObject trackedObj;
+    private SteamVR_Controller.Device controller { get { return SteamVR_Controller.Input((int)trackedObj.index); } }
 
-    private GameObject pickup;
-
-    // Use this for initialization
+    private Valve.VR.EVRButtonId triggerButton = Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger;
     void Start()
     {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
-
     // Update is called once per frame
     void Update()
     {
-        //if (controller == null)
-        //{
-        //    Debug.Log("Controller not initialized");
-        //    return;
-        //}
-
-        //if (controller.GetPressDown(gripButton) && pickup != null)
-        //{
-        //    pickup.transform.parent = this.transform;
-        //    pickup.GetComponent<Rigidbody>().useGravity = false;
-        //}
-        //if (controller.GetPressUp(gripButton) && pickup != null)
-        //{
-        //    pickup.transform.parent = null;
-        //    pickup.GetComponent<Rigidbody>().useGravity = true;
-        //}
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 5f))
+        //DrawLine(transform.position, transform.position + (transform.forward.normalized * 5f), Color.green);
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 10f))
         {
-            if(hit.transform.gameObject.name == "MenuBg")
+            Debug.Log(hit.transform.name);
+            if(hit.transform.gameObject.name == "MenuItemMaze" )
+            {
                 SceneManager.LoadScene("IntroSteps", LoadSceneMode.Single);
+            }else if(hit.transform.gameObject.name == "MainSceneButton" && controller.GetPressUp(triggerButton))
+            {
+                SceneManager.LoadScene("MikeSceneModified", LoadSceneMode.Single);
+            }
+
+            
         }
     }
-
-    private void OnTriggerEnter(Collider collider)
+    void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
     {
-        //pickup = collider.gameObject;
-        //var sc = pickup.GetComponent<VRStandardAssets.Menu.MenuButton>().m_SceneToLoad;
-        //SceneManager.LoadScene("IntroSteps", LoadSceneMode.Single);
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        pickup = null;
+        GameObject myLine = new GameObject();
+        myLine.transform.position = start;
+        myLine.AddComponent<LineRenderer>();
+        LineRenderer lr = myLine.GetComponent<LineRenderer>();
+        lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
+        lr.startColor = color;
+        lr.endColor = color;
+        lr.startWidth = .001f;
+        lr.endWidth = .001f;
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, end);
+        GameObject.Destroy(myLine, duration);
     }
 }

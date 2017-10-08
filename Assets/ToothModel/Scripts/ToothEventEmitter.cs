@@ -82,10 +82,10 @@ public class ToothEventEmitter : MonoBehaviour
             return;
         RaycastHit hit;
         //Debug.DrawLine(toolTransformation.position, toolTransformation.forward * 5000, Color.green); //  temp / remove - todo after debugging // why doesn't this draw?
-        DrawLine(toolTransformation.position, toolTransformation.position + (toolTransformation.forward.normalized* rayCastDist), Color.green);
+        //DrawLine(toolTransformation.position, toolTransformation.position + (toolTransformation.forward.normalized* rayCastDist), Color.green);
         if (Physics.Raycast(toolTransformation.position, toolTransformation.forward, out hit, rayCastDist))
         {
-            Debug.Log(hit.distance + " " + hit.transform.gameObject.name);
+            //Debug.Log(hit.distance + " " + hit.transform.gameObject.name);
    
             if (lastMeshEntered != null && (hit.distance >= (.01*factor) || hit.transform != lastMeshEntered))
             {

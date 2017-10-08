@@ -11,6 +11,8 @@ public class HapticFeedback : MonoBehaviour {
     public bool shouldStopHaptic { get; set; }
     SteamVR_Controller.Device device = null;
 
+    public float hapticScaleFactor = 1.0f;
+
     private bool _startHap = false;
     public bool startHaptic { get { return _startHap; } set
         {
@@ -45,7 +47,7 @@ public class HapticFeedback : MonoBehaviour {
     void LaunchHaptic()
     {
         if(device != null)
-            device.TriggerHapticPulse(3000);
+            device.TriggerHapticPulse((ushort)(hapticScaleFactor * 300.0f));
 
         if (shouldStopHaptic)
         {

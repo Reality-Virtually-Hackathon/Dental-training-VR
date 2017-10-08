@@ -7,7 +7,10 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/IntroductionScenes/StartMainMenu.unity
-    guid: 0601c71aff44468438662d056a2d10a7
+    guid: e4d33cc896d3d2e4f84f06194742e72f
   - enabled: 1
     path: Assets/IntroductionScenes/IntroSteps.unity
     guid: af30969f98e55c1439c18c769e2bc01a
+  - enabled: 1
+    path: Assets/MikeSceneModified.unity
+    guid: fd73f71edfa44a54093360ac7f8623d2

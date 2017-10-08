@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class CavityToothManager : MonoBehaviour {
 
-    Enums.CavityProcedureSteps currentStep;
+    public Enums.CavityProcedureSteps currentStep;
 
     [SerializeField]
+    GameObject cavityToothStart;
+    [SerializeField]
+    GameObject healedTooth;
+    [SerializeField]
     GameObject filling;
+    [SerializeField]
+    GameObject drilledTooth;
 
 	// Use this for initialization
 	void Awake () {
@@ -20,16 +26,23 @@ public class CavityToothManager : MonoBehaviour {
         {
             case Enums.CavityProcedureSteps.DrillCavity:
 
+                cavityToothStart.SetActive(false);
+                drilledTooth.SetActive(true);
                 currentStep = Enums.CavityProcedureSteps.FillCavity;
+                Debug.Log("COMPLETED");
 
                 break;
             case Enums.CavityProcedureSteps.FillCavity:
 
+                Debug.Log("TOOTH FILLED");
+                filling.SetActive(true);
                 currentStep = Enums.CavityProcedureSteps.PackCavity;
 
                 break;
             case Enums.CavityProcedureSteps.PackCavity:
 
+                filling.SetActive(false);
+                healedTooth.SetActive(true);
                 currentStep = Enums.CavityProcedureSteps.ScoopWaste;
 
                 break;
