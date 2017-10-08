@@ -12,6 +12,7 @@ public class DrillTool : MonoBehaviour, Interfaces.IPickable, Interfaces.IUsable
     HapticFeedback h;
     AudioSource a;
     Rigidbody b;
+    ToothEventEmitter de;
 
     IEnumerator inst = null;
 
@@ -28,6 +29,9 @@ public class DrillTool : MonoBehaviour, Interfaces.IPickable, Interfaces.IUsable
         b.useGravity = true;
         StopCoroutine(inst);
         inst = null;
+        de.shouldRun = false;
+        de.toolTransformation = null;
+        de = null;
     }
 
     public void OnPickup(Transform t, GameObject owner)
@@ -40,6 +44,10 @@ public class DrillTool : MonoBehaviour, Interfaces.IPickable, Interfaces.IUsable
         inst = RigidbodyPosition(t);
 
         StartCoroutine(inst);
+
+        de = owner.GetComponent<ToothEventEmitter>();
+        de.toolTransformation = drillBit;
+        de.shouldRun = true; // may be just enabled will be sufficient?
     }
 
     IEnumerator RigidbodyPosition(Transform t)

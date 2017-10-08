@@ -17,8 +17,7 @@ public class HapticFeedback : MonoBehaviour {
             _startHap = value;
             if (device != null)
             {
-                InvokeRepeating("LaunchHaptic", 0.0f, 0.01f);
-                _startHap = false;
+                invokeFcn();
             }
         } }
 
@@ -57,14 +56,19 @@ public class HapticFeedback : MonoBehaviour {
            
     }
 
+    void invokeFcn()
+    {
+        InvokeRepeating("LaunchHaptic", 0.0f, 0.01f);
+        _startHap = false;
+    }
+
     void HapticFeedbackProvider(object sender, ClickedEventArgs e)
     {
         var index = trackedObject.index;
         device = SteamVR_Controller.Input((int)trackedObject.index);
         if (_startHap)
         {
-            InvokeRepeating("LaunchHaptic", 0.0f, 0.01f);
-            _startHap = false;
+            invokeFcn();
         }
 
         //if(invoked)
