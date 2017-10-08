@@ -1,0 +1,50 @@
+# DENTAL VR TRAINING SIMULATOR
+
+## Inspiration
+Learning theoretically about dental procedures does not usually provide a convincing picture to the students new to the field of dentistry. 
+Our VR training simulator will provide them a platform to practice their craft without the fear of making mistakes. We believe that true learning 
+is always achieved when one learns from his/her mistakes. But, the stakes are too high when dealing with real life patients. Our VR training 
+sim will allow budding future dentists to train in an environment where they are free to make mistakes and learn through them, all while 
+making sure no actual patients get hurt!
+
+## What it does
+Simulates a dental office where the user acts as a practicing dentist. In this environment the user has to follow a particular set
+of steps to perform a dental cavity filling on an infected tooth.
+
+## How I built it
+- Consulted with a dentist to lay out the procedure for dental cavity filling procedure.
+- Models generated using Blender, Fusion 360, Makehuman and 3dsMax
+- Scripting done using C# in Unity
+
+## Assets
+- Dental Chair (Downloaded from Free3D)
+- Room
+- Table
+- Monitor
+- Dental Drill
+- Dental spoon excavator
+- Human Jaw with teeth
+
+## Challenges I ran into
+- Fitting all the work in the given time
+- Interference from other VIVE setups in the room
+- Precision required for dental models is challenging to replicate with current VR tools
+- Creating good quality low poly models for VR
+
+## Accomplishments that I'm proud of
+- Team formation to bring in the right folks for the project
+- A fun environment within the team
+- Project moving along a steady clip, realizing milestones as we planned
+- Haptic interactions modeled for dental tools
+- Realistic dental drill sound incorporated
+
+## What I learned
+- Team effort required to realize a creative project
+- No work is too small!
+- Learning from the guys who are great at the skills they bring to the table
+
+## What's next for Dental VR Training Simulator
+- More complex dental procedures
+- Integration with leap motion sensor to provide precise hand movements required to practice dexterity
+- Integration with precise haptic tools to mimic the actual dental tools in VR environment
+- Provide more realistic collision detection to warn the user when he/she affects non-infected teeth
