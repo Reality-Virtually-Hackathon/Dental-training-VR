@@ -20,7 +20,7 @@ public class WandC : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f))
         {
             Debug.Log(hit.transform.name);
-            if(hit.transform.gameObject.name == "MenuItemMaze" )
+            if(hit.transform.gameObject.name == "MenuItemMaze" && controller.GetPressUp(triggerButton))
             {
                 SceneManager.LoadScene("IntroSteps", LoadSceneMode.Single);
             }else if(hit.transform.gameObject.name == "MainSceneButton" && controller.GetPressUp(triggerButton))
