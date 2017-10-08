@@ -5,15 +5,24 @@ using Valve.VR;
 
 public class HapticFeedback : MonoBehaviour {
 
-    public SteamVR_TrackedController controller;
-    public SteamVR_TrackedObject trackedObject;
+    SteamVR_TrackedController controller;
+    SteamVR_TrackedObject trackedObject;
 
-    public bool shouldStopHaptic;
-    SteamVR_Controller.Device device;
+    public bool shouldStopHaptic { get; set; }
+    SteamVR_Controller.Device device = null;
 
-    public bool toggleHapticWhenTriggerPress = false;
+    private bool _startHap = false;
+    public bool startHaptic { get { return _startHap; } set
+        {
+            _startHap = value;
+            if (device != null)
+            {
+                InvokeRepeating("LaunchHaptic", 0.0f, 0.01f);
+                _startHap = false;
+            }
+        } }
 
-    bool invoked = false;
+    //public bool invoked = false;
 
 
     // Use this for initialization
@@ -43,6 +52,7 @@ public class HapticFeedback : MonoBehaviour {
         {
             CancelInvoke();
             shouldStopHaptic = false;
+            device = null;
         }
            
     }
@@ -51,15 +61,20 @@ public class HapticFeedback : MonoBehaviour {
     {
         var index = trackedObject.index;
         device = SteamVR_Controller.Input((int)trackedObject.index);
-        InvokeRepeating("LaunchHaptic", 0.0f, 0.01f);
-        if(invoked && toggleHapticWhenTriggerPress)
+        if (_startHap)
         {
-            shouldStopHaptic = true;
-            invoked = false;
-        } else
-        {
-            invoked = true;
+            InvokeRepeating("LaunchHaptic", 0.0f, 0.01f);
+            _startHap = false;
         }
+
+        //if(invoked)
+        //{
+        //    shouldStopHaptic = true;
+        //    invoked = false;
+        //} else
+        //{
+        //    invoked = true;
+        //}
         
     }
 }
